@@ -7,8 +7,13 @@ import (
 
 func main() {
 	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
-	e.Logger.Fatal(e.Start(":1323"))
+	e.GET("/kbo/:vatNumber", getKboInfo)
+	e.Logger.Fatal(e.Start(":8888"))
+}
+
+// e.GET("/kbo/:vatNumber", getKboInfo)
+func getKboInfo(c echo.Context) error {
+  	// kbo from path `kbo/:vatNumber`
+  	vatNumber := c.Param("vatNumber")
+	return c.String(http.StatusOK, vatNumber)
 }
